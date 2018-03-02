@@ -1,5 +1,6 @@
 package br.com.dl.audiotest.main.business
 
+import android.content.Context
 import br.com.dl.audiotest.main.business.effect.AttemptToPlay
 import br.com.dl.audiotest.main.business.effect.MainEffect
 import br.com.dl.audiotest.main.business.event.MainEvent
@@ -15,14 +16,14 @@ import com.spotify.mobius.Next
 fun mainUpdate(model: MainModel, event: MainEvent): Next<MainModel, MainEffect> {
     return when (event) {
         is PlayButtonClicked ->
-            onPlayButtonClicked(model.copy(musicLocation = event.musicLocation))
+            onPlayButtonClicked(model.copy(musicLocation = event.musicLocation), event.context)
         is PlaySuccessful -> onPlaySuccessful(model.copy(status = Playing))
         is PlayFailed -> onPlayFailed(model.copy(status = Error(event.msg)))
     }
 }
 
-fun onPlayButtonClicked(model: MainModel): Next<MainModel, MainEffect> = Next.next(model,
-        effects(AttemptToPlay(model.musicLocation, model.status)))
+fun onPlayButtonClicked(model: MainModel, context: Context): Next<MainModel, MainEffect> = Next.next(model,
+        effects(AttemptToPlay(model.musicLocation, model.status, context)))
 
 fun onPlaySuccessful(model: MainModel): Next<MainModel, MainEffect> = Next.next(model)
 

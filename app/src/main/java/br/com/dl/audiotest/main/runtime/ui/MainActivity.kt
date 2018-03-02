@@ -3,12 +3,11 @@ package br.com.dl.audiotest.main.runtime.ui
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import br.com.dl.audiotest.R
-import br.com.dl.audiotest.R.id.playBt
 import br.com.dl.audiotest.main.business.effect.MainEffect
 import br.com.dl.audiotest.main.business.event.MainEvent
 import br.com.dl.audiotest.main.business.event.PlayButtonClicked
-import br.com.dl.audiotest.main.business.model.MainModel
 import br.com.dl.audiotest.main.business.mainUpdate
+import br.com.dl.audiotest.main.business.model.*
 import br.com.dl.audiotest.main.runtime.handler.mainHandler
 import com.jakewharton.rxbinding2.view.RxView
 import com.spotify.mobius.Mobius
@@ -50,19 +49,33 @@ class MainActivity : AppCompatActivity() {
         controller.disconnect()
     }
 
-    fun mainUIHandler(modelStream: Observable<MainModel>): Observable<MainEvent> {
+    private fun mainUIHandler(modelStream: Observable<MainModel>): Observable<MainEvent> {
         val disposable = modelStream
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-
-                }
+                .subscribe { render(it) }
 
         val obsvPlayBt = RxView.clicks(playBt)
                 .debounce(500, TimeUnit.MILLISECONDS)
-                .map { PlayButtonClicked(musicLocation) }
+                .map { PlayButtonClicked(musicLocation, this.applicationContext) as MainEvent }
 
         return Observable
-                .merge(listOf())
+                .merge(listOf(obsvPlayBt))
                 .doOnDispose(disposable::dispose)
+    }
+
+    private fun render(model: MainModel) {
+        val prefix = resources.getString(R.string.status_lbl_prefix)
+        val status = model.status
+
+        when (status) {
+            is Playing -> updateStatus(prefix + resources.getString(R.string.status_playing))
+            is Recording -> updateStatus(prefix + resources.getString(R.string.status_recording))
+            is None -> updateStatus(prefix + resources.getString(R.string.status_none))
+            is Error -> updateStatus(prefix + status.msg)
+        }
+    }
+
+    private fun updateStatus(msg: String) {
+        playBt.text = msg
     }
 }

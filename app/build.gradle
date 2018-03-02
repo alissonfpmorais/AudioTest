@@ -40,4 +40,12 @@ dependencies {
 
     // RxBinding (ReactiveX)
     implementation "com.jakewharton.rxbinding2:rxbinding:$rxbinding_version"
+
+    // Arrow (Functional companion library for Kotlin)
+    implementation "io.arrow-kt:arrow-core:$arrow_version"
+    implementation "io.arrow-kt:arrow-typeclasses:$arrow_version"
+    implementation "io.arrow-kt:arrow-instances:$arrow_version"
+    implementation "io.arrow-kt:arrow-data:$arrow_version"
+    implementation "io.arrow-kt:arrow-syntax:$arrow_version"
+    kapt    "io.arrow-kt:arrow-annotations-processor:$arrow_version"
 }

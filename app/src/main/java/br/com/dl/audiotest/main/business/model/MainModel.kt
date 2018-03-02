@@ -8,8 +8,8 @@ sealed class AudioStatus {
 }
 
 typealias Playing = AudioStatus.Playing
-typealias Recording = AudioStatus.Playing
-typealias None = AudioStatus.Playing
+typealias Recording = AudioStatus.Recording
+typealias None = AudioStatus.None
 typealias Error = AudioStatus.Error
 
 data class MainModel(val musicLocation: String = "",

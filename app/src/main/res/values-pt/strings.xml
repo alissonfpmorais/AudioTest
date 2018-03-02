@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AudioTest</string>
     <string name="action_bt">Ação</string>
     <string name="play_bt">Reproduzir</string>
     <string name="record_bt">Gravar</string>
+    <string name="status_playing">Reproduzindo</string>
+    <string name="status_recording">Gravando</string>
+    <string name="status_none">Aguardando</string>
 </resources>

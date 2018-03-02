@@ -5,4 +5,7 @@
     <string name="play_bt">Play</string>
     <string name="record_bt">Record</string>
     <string name="status_lbl_prefix" translatable="false">Status: </string>
+    <string name="status_playing">Playing</string>
+    <string name="status_recording">Recording</string>
+    <string name="status_none">Waiting</string>
 </resources>

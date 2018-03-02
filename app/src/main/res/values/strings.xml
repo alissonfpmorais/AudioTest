@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name" translatable="false">AudioTest</string>
+
+    <string name="action_bt">Action</string>
+    <string name="play_bt">Play</string>
+    <string name="record_bt">Record</string>
+    <string name="status_lbl_prefix" translatable="false">Status: </string>
+</resources>

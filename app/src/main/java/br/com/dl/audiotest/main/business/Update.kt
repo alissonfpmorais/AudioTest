@@ -17,7 +17,7 @@ fun mainUpdate(model: MainModel, event: MainEvent): Next<MainModel, MainEffect> 
     return when (event) {
         is PlayButtonClicked ->
             onPlayButtonClicked(model.copy(musicLocation = event.musicLocation), event.context)
-        is PlaySuccessful -> onPlaySuccessful(model.copy(status = Playing))
+        is PlaySuccessful -> onPlaySuccessful(model.copy(status = Playing(event.currentPositionStream)))
         is PlayFailed -> onPlayFailed(model.copy(status = Error(event.msg)))
     }
 }

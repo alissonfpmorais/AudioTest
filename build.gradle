@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.30'
+    ext.kotlin_version = '1.2.20'
     ext.mobius_version = '1.1.1'
     ext.rxbinding_version = '2.1.1'
     ext.arrow_version = '0.6.1'

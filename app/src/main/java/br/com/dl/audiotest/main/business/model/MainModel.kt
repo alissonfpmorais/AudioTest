@@ -1,7 +1,9 @@
 package br.com.dl.audiotest.main.business.model
 
+import io.reactivex.Observable
+
 sealed class AudioStatus {
-    object Playing: AudioStatus()
+    data class Playing(val currentPositionStream: Observable<Int>): AudioStatus()
     object Recording: AudioStatus()
     object None: AudioStatus()
     data class Error(val msg: String): AudioStatus()
